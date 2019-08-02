@@ -1,0 +1,53 @@
+/// generated file, do not edit!
+@foreach{mixin : mixins("Import")}import '@{mixin.expression}';@end{'\n'}
+
+class @{className} implements MjolnirObject {
+
+@foreach{mixin : mixins("Body")}@{mixin.expression}@end{'\n'}
+
+   // members
+@foreach{field : fields}   @{field.type} @{field.info.name};@end{'\n'}
+
+   // ctor
+   @{className}._({
+@foreach{field : fields}     this.@{field.info.name},@end{'\n'}
+   });
+
+   // factory
+   factory @{className}.fromJson(Map<String, dynamic> json) {
+      if (json == null) {
+         return null;
+      }
+@foreach{field : fields}      @{field.resolver.dynamicType(field)} @{field.info.name} = @{field.resolver.ctor1(field)};@end{'\n'}
+
+      @foreach{mixin : mixins("Ctor")}
+            // @{mixin.info.name}
+            @{mixin.expression}@end{}
+
+      return @{className}._(
+@foreach{field : fields}         @{field.info.name} : @{field.info.name}@end{',\n'}
+      );
+   }
+
+   @{className} copyWith({
+@foreach{field : fields}      @{field.type} @{field.info.name}@end{',\n'}
+   }) {
+      return @{className}._(
+@foreach{field : fields}         @{field.info.name} : @{field.resolver.copyWith(field)}@end{',\n'}
+      );
+   }
+
+   Map<String, dynamic> toJson() {
+      final output = Map<String, dynamic>();
+
+@foreach{field : fields}        output["@{field.info.nameUnescaped}"] = @{field.resolver.dtor(field)};@end{'\n'}
+
+      return output;
+   }
+
+   static @{className} Function(dynamic json) deserializer = ((json) => @{className}.fromJson(json));
+
+   @override
+   String get objectId => @{resolver.objectId(this)}
+
+}

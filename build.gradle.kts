@@ -5,7 +5,7 @@ plugins {
 
 allprojects {
 
-    group = "dev.vishna.voyager"
+    group = "dev.vishna.mjolnir"
     version = "0.1.0-SNAPSHOT"
 
     repositories {

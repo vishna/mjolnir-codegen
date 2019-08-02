@@ -1,45 +1,17 @@
-package dev.vishna.voyager.codegen
+package dev.vishna.mjolnir.codegen
 
 import dev.vishna.emojilog.std.*
-import dev.vishna.mvel.interpolate
 import dev.vishna.stringcode.asResource
-import dev.vishna.stringcode.camelize
 import dev.vishna.stringcode.saveAs
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.IllegalStateException
-import java.util.*
 
 private val log by lazy { defaultLogger() }
 
-/**
- * Template for the router paths
- */
-const val dartVoyagerPathsClass: ResourcePath = "/dart_voyager_paths_class.mvel"
-
-/**
- * Template for the automated test classes
- */
-const val dartVoyagerTests: ResourcePath = "/dart_voyager_tests.mvel"
-
-/**
- * Template for the automated scenario class
- */
-const val dartVoyagerTestScenarioClass: ResourcePath = "/dart_voyager_tests_scenario_class.mvel"
-
-/**
- * Template for the automated scenario execution block
- */
-const val dartVoyagerTestScenarioExecutionBlock: ResourcePath = "/dart_voyager_tests_scenario_execution_block.mvel"
-
-/**
- * Initial template this tool consumes
- */
-const val voyagerCodegen: ResourcePath = "/voyager-codegen.yaml"
-
-fun bootstrapVoyagerPatrolConfig(patrolFile: File) = if (File(pwd, "pubspec.yaml").exists()) {
+fun bootstrapMjolnirPatrolConfig(patrolFile: File) = if (File(pwd, "pubspec.yaml").exists()) {
     log.alert.."${patrolFile.name} not found, creating one for you..."
-    voyagerCodegen.asResource().saveAs(patrolFile.absolutePath)
+    mjolnirCodegen.asResource().saveAs(patrolFile.absolutePath)
     log.save.."${patrolFile.name} created, please edit it"
     true
 } else {

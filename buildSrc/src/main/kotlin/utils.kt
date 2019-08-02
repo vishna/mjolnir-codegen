@@ -8,6 +8,7 @@ import org.gradle.kotlin.dsl.*
 fun Project.kotlinProject() {
     dependencies {
         "compile"(kotlin("stdlib"))
+        "compile"(kotlin("reflect"))
         "compile"("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutinesVersion}")
         "compile"("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.kotlinCoroutinesVersion}")
     }

@@ -1,0 +1,74 @@
+// generated file, do not edit!
+
+package @{packageName};
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+@foreach{mixin : mixins("Import")}
+import @{mixin.expression};@end{}
+
+public final class @{className} implements Serializable {
+   // serializable
+   private static final long serialVersionUID = -2800020519567815353L;
+
+   // members
+@foreach{field : fields}   public @{field.type} @{field.info.name};@end{'\n'}
+
+   // ctor
+   public @{className}() {
+      // default
+   }
+
+   public @{className}(JSONObject json) {
+@foreach{field : fields}      try { @{field.info.name} = @{field.resolver.ctor(field)}; } catch (Throwable t) {};@end{'\n'}
+@foreach{mixin : mixins("Ctor")}
+      // @{mixin.info.name}
+      @{mixin.expression}@end{}
+   }
+
+   public JSONObject toJSON() {
+      JSONObject json = new JSONObject();
+
+      @foreach{field : fields}
+         try { json.put("@{field.info.name}", @{field.resolver.dtor(field)}); } catch (JSONException e) {} @end{}
+
+      return json;
+   }
+
+   public static JSONArray toJSONArray(List<@{className}> items) {
+      JSONArray array = new JSONArray();
+      if (items != null) for (@{className} item : items) {
+         array.put(item.toJSON());
+      }
+      return array;
+   }
+
+@foreach{mixin : mixins("Body")}
+      // @{mixin.info.name}
+      @{mixin.expression}@end{}
+
+   // static methods
+   public static List<@{className}> fromJSONArray(JSONArray array) {
+      ArrayList<@{className}> result = new ArrayList<@{className}>();
+      if (array == null || array.length() < 1)
+         return result;
+
+      int n = array.length();
+      for (int i=0; i<n; i++) {
+         JSONObject obj = array.optJSONObject(i);
+         if (null != obj) {
+            result.add(new @{className}(obj));
+         }
+      }
+      return result;
+   }
+
+   public static @{className} fromJSON(JSONObject json) {
+      return new @{className}(json);
+   }
+}

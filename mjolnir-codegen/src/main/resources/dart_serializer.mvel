@@ -1,0 +1,9 @@
+
+dynamic Function(dynamic json) deserializerByClassName(String className) {
+   switch(className) {
+@foreach{class : classes}      case "@{class}" : return @{class}.deserializer;@end{'\n'}
+      default: {
+        throw ArgumentError("deserializer for $className not defined");
+      }
+   }
+}

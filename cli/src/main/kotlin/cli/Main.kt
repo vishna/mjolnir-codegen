@@ -1,8 +1,9 @@
 @file:JvmName("Main")
 package cli
 
+import dev.vishna.mjolnir.codegen.bootstrapMjolnirPatrolConfig
+import dev.vishna.mjolnir.codegen.generateCode
 import dev.vishna.patrol.*
-import dev.vishna.voyager.codegen.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -40,5 +41,5 @@ fun main(args: CommandArgs) = args.patrol {
         }
     }
 
-    bootstrap(::bootstrapVoyagerPatrolConfig)
+    bootstrap(::bootstrapMjolnirPatrolConfig)
 }

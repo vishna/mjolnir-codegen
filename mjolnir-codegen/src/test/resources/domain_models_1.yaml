@@ -1,0 +1,13 @@
+---
+photo:
+  id: String
+  url: String
+  width: Int
+  height: Int
+  updated: Date
+  user: user
+user:
+  id: String
+  nickname: String
+  fullname: String
+  blocked: Boolean?

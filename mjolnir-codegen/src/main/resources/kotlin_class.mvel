@@ -1,0 +1,7 @@
+// generated file, do not edit!
+
+package @{packageName}
+
+data class @{className}(
+@foreach{field : fields}  val @{field.info.name} : @{field.type}@end{',\n'}
+)
