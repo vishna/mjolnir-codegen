@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     dependencies {
@@ -31,5 +32,12 @@ artifacts {
 
 dependencies {
     compile(project(":mjolnir-codegen"))
-    compile("com.github.vishna:patrol:master-SNAPSHOT")
+    compile("com.github.vishna:patrol:0.0.3")
+
+    testCompile("junit", "junit", "4.12")
+    testCompile("org.amshove.kluent:kluent:1.34")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
 }

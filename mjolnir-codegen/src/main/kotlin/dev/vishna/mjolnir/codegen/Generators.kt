@@ -4,7 +4,7 @@ import dev.vishna.mvel.interpolate
 import dev.vishna.stringcode.asResource
 
 suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) : String {
-    var template = dartTemplateFile.asResource()
+    val dartTemplate = dartTemplateFile.asResource()
 
     val models = domainModels
         .asYaml()
@@ -23,8 +23,8 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
     output += """/// Generated file, DO NOT EDIT!!!"""
     output += imports
     output += models.map {
-        requireNotNull(template.interpolate(it)) {
-            "failed interpolating: $template \n for: \n$it\n"
+        requireNotNull(dartTemplate.interpolate(it)) {
+            "failed interpolating: $dartTemplate \n for: \n$it\n"
         }
     }
 

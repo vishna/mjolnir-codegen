@@ -5,6 +5,7 @@ import dev.vishna.stringcode.asResource
 import dev.vishna.stringcode.saveAs
 import kotlinx.coroutines.*
 import java.io.File
+import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 private val log by lazy { defaultLogger() }
@@ -18,7 +19,7 @@ fun bootstrapMjolnirPatrolConfig(patrolFile: File) = if (File(pwd, "pubspec.yaml
     false
 }
 
-suspend fun generateCode(name: String, source: String, target: String, testTarget: String?, dryRun: Boolean) = supervisorScope {
+suspend fun generateCode(name: String, source: String, lang: String, target: String, otherModels: List<String>, dryRun: Boolean) = supervisorScope {
 
     if (source.isBlank()) {
         throw IllegalStateException("No source value provided for $name")
@@ -30,16 +31,14 @@ suspend fun generateCode(name: String, source: String, target: String, testTarge
         throw IllegalStateException("Provided source file for $name doesn't exist")
     }
 
-    // TODO
+    val domainModels = mjolnirFile.readText()
 
-    val jobs = mutableListOf<Job>()
-    jobs += async { delay(500) }
-    if (!testTarget.isNullOrBlank()) {
-        jobs += async {
-          delay(500)
+    when (lang) {
+        "dart" -> {
+            domainModelsToDart(domainModels, otherModels).saveToTarget(target, dryRun)
         }
+        else -> throw IllegalArgumentException("lang=$lang not supported by this generator")
     }
-    jobs.forEach { it.join() }
 }
 
 private fun String.saveToTarget(target: String, dryRun: Boolean) {

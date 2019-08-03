@@ -27,7 +27,8 @@ fun main(args: CommandArgs) = args.patrol {
                 name = watchPoint.name,
                 source = watchPoint.source,
                 target = requireNotNull(watchPoint["target"] as String?) { "target value not provided in $watchPoint" },
-                testTarget = watchPoint["testTarget"] as String?,
+                lang = requireNotNull(watchPoint["lang"] as String?) { "lang value not provided in $watchPoint" },
+                otherModels = (watchPoint["other_models"] as? List<*>)?.map { it.toString() } ?: emptyList(),
                 dryRun = dryRun
             )
         }.apply {
