@@ -1,3 +1,4 @@
+/// Generated file, DO NOT EDIT!!!
 class Photo implements MjolnirObject {
   // members
   String id;

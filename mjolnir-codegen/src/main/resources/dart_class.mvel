@@ -1,6 +1,3 @@
-/// generated file, do not edit!
-@foreach{mixin : mixins("Import")}import '@{mixin.expression}';@end{'\n'}
-
 class @{className} implements MjolnirObject {
 
 @foreach{mixin : mixins("Body")}@{mixin.expression}@end{'\n'}

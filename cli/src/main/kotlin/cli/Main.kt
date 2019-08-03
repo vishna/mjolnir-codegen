@@ -14,11 +14,11 @@ fun main(args: CommandArgs) = args.patrol {
     val inspectionJobs = ConcurrentHashMap<String, Job>()
 
     name {
-        "voyager-codegen"
+        "mjolnir-codegen"
     }
 
     help {
-        "Code generation utility for the Voyager project."
+        "Mjolnir Code Generator."
     }
 
     onInspection { scope, watchPoint, dryRun, runOnce ->
