@@ -1,5 +1,6 @@
 package dev.vishna.mjolnir.codegen
 
+import dev.vishna.mjolnir.codegen.lang.JavaOutput
 import dev.vishna.mvel.interpolate
 import dev.vishna.stringcode.asResource
 
@@ -35,4 +36,23 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
         ))!!
 
     return output.joinToString(separator = "\n").dartfmt()
+}
+
+fun domainModelsToJava(domainModels: String, otherModels: List<String>, packageName: String) : List<JavaOutput> {
+    val template = javaTemplateFile.asResource()
+
+    val models = domainModels
+        .asYaml()
+        .asModelList(
+            lang = "java",
+            packageName = "dev.vishna.test",
+            otherModels = otherModels
+        )
+
+    return models.map {
+        JavaOutput(
+            className = it.className,
+            body = template.interpolate(it)!!
+        )
+    }
 }

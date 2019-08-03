@@ -89,5 +89,24 @@ java -jar mjolnir-codegen.jar
 
 The above will bootstrap `mjolnir-cogegen.yaml` in your current directory:
 
+```yaml
+- name: MjolnirSDK # base name
+  source: # location of domain models YAML
+  lang: dart
+  target: lib/gen/mjolnir_sdk.dart
+```
 
 ## Usage
+
+```
+Usage: mjolnir-codegen [OPTIONS]
+
+  Mjolnir Code Generator.
+
+Options:
+  --run-once  Runs mjolnir-codegen only once, doesn't watch file system,
+              useful for CI/CD.
+  --dry-run   Runs mjolnir-codegen in a dry mode
+  --debug     Runs mjolnir-codegen in a debug mode
+  -h, --help  Show this message and exit
+```

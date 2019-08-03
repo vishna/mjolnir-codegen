@@ -1,6 +1,6 @@
 ## This file should be checked in version control
 ## Describes sources and targets for the mjolnir-codegen tool
-- name: MjolnirSDK # base name for generated classes, e.g. VoyagerPaths, VoyagerTests etc.
+- name: MjolnirSDK # base name
   source: # location of domain models YAML
   lang: dart
   target: lib/gen/mjolnir_sdk.dart

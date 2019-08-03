@@ -58,3 +58,5 @@ class JavaResolver : LangResolver() {
         }
     }
 }
+
+data class JavaOutput(val className: String, val body: String)
