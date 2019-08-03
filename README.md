@@ -75,5 +75,19 @@ class User implements MjolnirObject {
 
 ## Installation
 
+Download ready to use `mjolnir-codegen.jar` from jitpack and put it where your flutter project is (that is where `pubspec.yaml` is):
+
+```
+wget https://jitpack.io/com/github/vishna/mjolnir-codegen/cli/master-SNAPSHOT/cli-master-SNAPSHOT-all.jar -O mjolnir-codegen.jar
+```
+
+Next up start mjolnir-codegen:
+
+```
+java -jar mjolnir-codegen.jar
+```
+
+The above will bootstrap `mjolnir-cogegen.yaml` in your current directory:
+
 
 ## Usage
