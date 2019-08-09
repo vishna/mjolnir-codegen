@@ -8,7 +8,7 @@ import java.io.File
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
-private val log by lazy { defaultLogger() }
+internal val log by lazy { defaultLogger() }
 
 fun bootstrapMjolnirPatrolConfig(patrolFile: File) = if (File(pwd, "pubspec.yaml").exists()) {
     log.alert.."${patrolFile.name} not found, creating one for you..."
