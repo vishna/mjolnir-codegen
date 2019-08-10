@@ -1,5 +1,6 @@
 package dev.vishna.mjolnir.codegen
 
+import dev.vishna.dartfmt.dartfmt
 import dev.vishna.mjolnir.codegen.lang.InterpolatedOutput
 import dev.vishna.mvel.interpolate
 import dev.vishna.stringcode.asResource
