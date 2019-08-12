@@ -18,21 +18,21 @@ user:
 
 ```dart
 class User implements MjolnirObject {
-  // members
-  String id;
-  String nickname;
-  String fullname;
-  bool blocked;
+  /// members
+  final String id;
+  final String nickname;
+  final String fullname;
+  final bool blocked;
 
-  // ctor
-  User._({
+  /// ctor
+  const User({
     this.id,
     this.nickname,
     this.fullname,
     this.blocked,
   });
 
-  // factory
+  /// factory
   factory User.fromJson(Map<String, dynamic> json) {
     if (json == null) {
       return null;
@@ -42,12 +42,12 @@ class User implements MjolnirObject {
     dynamic fullname = json['fullname']?.toString();
     dynamic blocked = json['blocked'];
 
-    return User._(
+    return User(
         id: id, nickname: nickname, fullname: fullname, blocked: blocked);
   }
 
   User copyWith({String id, String nickname, String fullname, bool blocked}) {
-    return User._(
+    return User(
         id: id ?? this.id,
         nickname: nickname ?? this.nickname,
         fullname: fullname ?? this.fullname,

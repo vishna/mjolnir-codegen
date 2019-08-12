@@ -2,15 +2,15 @@ class @{className} implements MjolnirObject {
 
 @foreach{mixin : mixins("Body")}@{mixin.expression}@end{'\n'}
 
-   // members
-@foreach{field : fields}   @{field.type} @{field.info.name};@end{'\n'}
+   /// members
+@foreach{field : fields}   final @{field.type} @{field.info.name};@end{'\n'}
 
-   // ctor
-   @{className}._({
+   /// ctor
+   const @{className}({
 @foreach{field : fields}     this.@{field.info.name},@end{'\n'}
    });
 
-   // factory
+   /// factory
    factory @{className}.fromJson(Map<String, dynamic> json) {
       if (json == null) {
          return null;
@@ -21,7 +21,7 @@ class @{className} implements MjolnirObject {
             // @{mixin.info.name}
             @{mixin.expression}@end{}
 
-      return @{className}._(
+      return @{className}(
 @foreach{field : fields}         @{field.info.name} : @{field.info.name}@end{',\n'}
       );
    }
@@ -29,7 +29,7 @@ class @{className} implements MjolnirObject {
    @{className} copyWith({
 @foreach{field : fields}      @{field.type} @{field.info.name}@end{',\n'}
    }) {
-      return @{className}._(
+      return @{className}(
 @foreach{field : fields}         @{field.info.name} : @{field.resolver.copyWith(field)}@end{',\n'}
       );
    }

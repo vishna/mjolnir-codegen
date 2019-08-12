@@ -1,15 +1,15 @@
 /// Generated file, DO NOT EDIT!!!
 class Photo implements MjolnirObject {
-  // members
-  String id;
-  String url;
-  int width;
-  int height;
-  DateTime updated;
-  User user;
+  /// members
+  final String id;
+  final String url;
+  final int width;
+  final int height;
+  final DateTime updated;
+  final User user;
 
-  // ctor
-  Photo._({
+  /// ctor
+  const Photo({
     this.id,
     this.url,
     this.width,
@@ -18,7 +18,7 @@ class Photo implements MjolnirObject {
     this.user,
   });
 
-  // factory
+  /// factory
   factory Photo.fromJson(Map<String, dynamic> json) {
     if (json == null) {
       return null;
@@ -30,7 +30,7 @@ class Photo implements MjolnirObject {
     DateTime updated = DateTime.parse(json['updated']);
     User user = User.fromJson(json['user']);
 
-    return Photo._(
+    return Photo(
         id: id,
         url: url,
         width: width,
@@ -46,7 +46,7 @@ class Photo implements MjolnirObject {
       int height,
       DateTime updated,
       User user}) {
-    return Photo._(
+    return Photo(
         id: id ?? this.id,
         url: url ?? this.url,
         width: width ?? this.width,
@@ -76,21 +76,21 @@ class Photo implements MjolnirObject {
 }
 
 class User implements MjolnirObject {
-  // members
-  String id;
-  String nickname;
-  String fullname;
-  bool blocked;
+  /// members
+  final String id;
+  final String nickname;
+  final String fullname;
+  final bool blocked;
 
-  // ctor
-  User._({
+  /// ctor
+  const User({
     this.id,
     this.nickname,
     this.fullname,
     this.blocked,
   });
 
-  // factory
+  /// factory
   factory User.fromJson(Map<String, dynamic> json) {
     if (json == null) {
       return null;
@@ -100,12 +100,12 @@ class User implements MjolnirObject {
     dynamic fullname = json['fullname']?.toString();
     dynamic blocked = json['blocked'];
 
-    return User._(
+    return User(
         id: id, nickname: nickname, fullname: fullname, blocked: blocked);
   }
 
   User copyWith({String id, String nickname, String fullname, bool blocked}) {
-    return User._(
+    return User(
         id: id ?? this.id,
         nickname: nickname ?? this.nickname,
         fullname: fullname ?? this.fullname,
