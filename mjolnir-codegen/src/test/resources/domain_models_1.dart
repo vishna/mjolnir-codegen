@@ -1,4 +1,15 @@
 /// Generated file, DO NOT EDIT!!!
+// ignore_for_file: strong_mode_implicit_dynamic_parameter
+// ignore_for_file: strong_mode_implicit_dynamic_type
+// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: omit_local_variable_types
+// ignore_for_file: prefer_final_locals
+// ignore_for_file: sort_constructors_first
+// ignore_for_file: directives_ordering
+// ignore_for_file: avoid_init_to_null
+// ignore_for_file: prefer_collection_literals
+// ignore_for_file: unnecessary_parenthesis
+// ignore_for_file: unnecessary_brace_in_string_interps
 class Photo implements MjolnirObject {
   /// members
   final String id;

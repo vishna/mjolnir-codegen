@@ -151,5 +151,5 @@ class DartResolver : LangResolver() {
     }
 
     override val specialNames: List<String>
-        get() = listOf("new", "do", "with", "other")
+        get() = listOf("new", "do", "with", "other", "class")
 }

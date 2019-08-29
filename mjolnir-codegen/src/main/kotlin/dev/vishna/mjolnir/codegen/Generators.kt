@@ -22,7 +22,7 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
         .map { """import '$it';""" }
 
     val output = ArrayList<String>()
-    output += """/// Generated file, DO NOT EDIT!!!"""
+    output += dartNoEditComment.asResource()
     output += imports
     output += models.map {
         requireNotNull(dartTemplate.interpolate(it)) {
