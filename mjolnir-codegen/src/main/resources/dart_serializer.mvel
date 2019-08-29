@@ -7,3 +7,11 @@ dynamic Function(dynamic json) deserializerByClassName(String className) {
       }
    }
 }
+
+DateTime _safeParse(String formattedString) {
+  try {
+    return DateTime.parse(formattedString);
+  } catch (_) {
+    return null;
+  }
+}

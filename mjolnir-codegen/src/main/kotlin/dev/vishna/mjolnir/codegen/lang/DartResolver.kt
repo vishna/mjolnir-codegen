@@ -43,7 +43,7 @@ class DartResolver : LangResolver() {
         return with(field.info) {
             when (field) {
                 is CustomField -> """${field.customType.smartCamelize()}.fromJson(json['$nameUnescaped'])"""
-                is DateField -> """DateTime.parse(json['$nameUnescaped'])"""
+                is DateField -> """_safeParse(json['$nameUnescaped'])"""
                 is ArrayField -> """json['$nameUnescaped']?.map((it) => ${arrayCtor(field.field)})?.toList()${arrayCast(field.field)}"""
                 is FloatField -> "json['$nameUnescaped']?.toDouble()"
                 is StringField -> "json['$nameUnescaped']?.toString()"

@@ -38,7 +38,7 @@ class Photo implements MjolnirObject {
     dynamic url = json['url']?.toString();
     dynamic width = json['width'];
     dynamic height = json['height'];
-    DateTime updated = DateTime.parse(json['updated']);
+    DateTime updated = _safeParse(json['updated']);
     User user = User.fromJson(json['user']);
 
     return Photo(
@@ -151,5 +151,13 @@ dynamic Function(dynamic json) deserializerByClassName(String className) {
       {
         throw ArgumentError("deserializer for $className not defined");
       }
+  }
+}
+
+DateTime _safeParse(String formattedString) {
+  try {
+    return DateTime.parse(formattedString);
+  } catch (_) {
+    return null;
   }
 }
