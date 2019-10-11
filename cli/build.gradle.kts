@@ -32,7 +32,7 @@ artifacts {
 
 dependencies {
     compile(project(":mjolnir-codegen"))
-    compile("com.github.vishna:patrol:0.0.3")
+    compile("com.github.vishna:patrol:0.0.5")
 
     testCompile("junit", "junit", "4.12")
     testCompile("org.amshove.kluent:kluent:1.34")
