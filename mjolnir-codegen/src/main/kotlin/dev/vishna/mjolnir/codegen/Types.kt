@@ -14,6 +14,7 @@ sealed class Type(val name: String) {
     }
 }
 
+object TypeId : Type("_id")
 object TypeString : Type("String")
 object TypeInt : Type("Int")
 object TypeDate : Type("Date")

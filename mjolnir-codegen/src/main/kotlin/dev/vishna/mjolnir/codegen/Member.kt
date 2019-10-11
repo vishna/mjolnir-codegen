@@ -8,7 +8,7 @@ import dev.vishna.stringcode.applyIf
 class Mixin(override val info: Info, val subtype: String, val expression: String) : Member()
 
 sealed class Field(override val info: Info) : Member()
-class StringField(info: Info) : Field(info)
+class StringField(info: Info, val id : Boolean = false) : Field(info)
 class IntField(info: Info) : Field(info)
 class DateField(info: Info) : Field(info)
 class FloatField(info: Info) : Field(info)
@@ -86,6 +86,7 @@ fun fieldFor(resolver: LangResolver, knownModels: List<String>, parent: Model, l
         TypeFloat -> FloatField(info)
         TypeLong -> LongField(info)
         TypeBoolen -> BooleanField(info)
+        TypeId -> StringField(info, id = true)
     }
 }
 
@@ -132,6 +133,7 @@ fun arrayFor(resolver: LangResolver, knownModels: List<String>, otherModels: Lis
         TypeFloat -> FloatField(info)
         TypeLong -> LongField(info)
         TypeBoolen -> BooleanField(info)
+        TypeId -> throw IllegalArgumentException("can't have _id in array")
     })
 }
 

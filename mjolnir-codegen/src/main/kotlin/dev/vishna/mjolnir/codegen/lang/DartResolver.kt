@@ -10,7 +10,7 @@ class DartResolver : LangResolver() {
 
     override fun memberType(field: Field): String {
 
-        return when(field) {
+        return when (field) {
             is StringField -> "String"
             is IntField -> "int"
             is DateField -> "DateTime"
@@ -22,7 +22,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun dynamicType(field: Field) : String {
+    fun dynamicType(field: Field): String {
 
         return with(field.info) {
             when (field) {
@@ -34,7 +34,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun ctor1(field: Field) : String {
+    fun ctor1(field: Field): String {
 
         if (!field.info.serializable) { // means it isn't part of json
             return "null"
@@ -44,7 +44,9 @@ class DartResolver : LangResolver() {
             when (field) {
                 is CustomField -> """${field.customType.smartCamelize()}.fromJson(json['$nameUnescaped'])"""
                 is DateField -> """_safeParse(json['$nameUnescaped'])"""
-                is ArrayField -> """json['$nameUnescaped']?.map((it) => ${arrayCtor(field.field)})?.toList()${arrayCast(field.field)}"""
+                is ArrayField -> """json['$nameUnescaped']?.map((it) => ${arrayCtor(field.field)})?.toList()${arrayCast(
+                    field.field
+                )}"""
                 is FloatField -> "json['$nameUnescaped']?.toDouble()"
                 is StringField -> "json['$nameUnescaped']?.toString()"
                 else -> """json['$nameUnescaped']"""
@@ -52,7 +54,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    private fun arrayCtor(innerField: Field) : String {
+    private fun arrayCtor(innerField: Field): String {
         return when (innerField) {
             is FloatField -> "it?.toDouble()"
             is LongField,
@@ -65,7 +67,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    private fun arrayCast(innerField: Field) : String {
+    private fun arrayCast(innerField: Field): String {
         return when (innerField) {
             is FloatField,
             is LongField,
@@ -78,7 +80,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    private fun arrayMap(innerField: Field) : String {
+    private fun arrayMap(innerField: Field): String {
         return when (innerField) {
             is FloatField,
             is LongField,
@@ -91,7 +93,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun copyWith(field: Field) : String {
+    fun copyWith(field: Field): String {
         return with(field.info) {
             when (field) {
                 is FloatField,
@@ -106,7 +108,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun dtor(field: Field) : String {
+    fun dtor(field: Field): String {
 
         if (!field.info.serializable) {
             return "null"
@@ -126,7 +128,7 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun arrayDtor(field: Field) : String {
+    fun arrayDtor(field: Field): String {
         return when (field) {
             is FloatField,
             is LongField,
@@ -139,12 +141,13 @@ class DartResolver : LangResolver() {
         }
     }
 
-    fun objectId(model: Model) : String {
+    fun objectId(model: Model): String {
 
-        val hasIdField = model.fields.find { it is StringField && it.info.name == "id" } != null
+        val idField =
+            model.fields.find { (it is StringField && it.info.name == "id") || (it is StringField && it.id) }
 
-        if (hasIdField) {
-            return """"${className(model)}#${'$'}{id}";"""
+        if (idField != null) {
+            return """"${className(model)}#${'$'}{${idField.info.name}}";"""
         } else {
             return "null; // id field not recognized by generator"
         }
