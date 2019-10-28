@@ -33,7 +33,7 @@ class Photo implements MjolnirObject {
   });
 
   /// factory
-  factory Photo.fromJson(Map<String, dynamic> json) {
+  factory Photo.fromJson(Map<dynamic, dynamic> json) {
     if (json == null) {
       return null;
     }
@@ -69,8 +69,8 @@ class Photo implements MjolnirObject {
         user: user ?? this.user?.copyWith());
   }
 
-  Map<String, dynamic> toJson() {
-    final output = Map<String, dynamic>();
+  Map<dynamic, dynamic> toJson() {
+    final output = Map<dynamic, dynamic>();
 
     output["id"] = id;
     output["url"] = url;
@@ -105,7 +105,7 @@ class User implements MjolnirObject {
   });
 
   /// factory
-  factory User.fromJson(Map<String, dynamic> json) {
+  factory User.fromJson(Map<dynamic, dynamic> json) {
     if (json == null) {
       return null;
     }
@@ -126,8 +126,8 @@ class User implements MjolnirObject {
         blocked: blocked ?? this.blocked);
   }
 
-  Map<String, dynamic> toJson() {
-    final output = Map<String, dynamic>();
+  Map<dynamic, dynamic> toJson() {
+    final output = Map<dynamic, dynamic>();
 
     output["id"] = id;
     output["nickname"] = nickname;

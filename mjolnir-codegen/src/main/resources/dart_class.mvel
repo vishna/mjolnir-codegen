@@ -11,7 +11,7 @@ class @{className} implements MjolnirObject {
    });
 
    /// factory
-   factory @{className}.fromJson(Map<String, dynamic> json) {
+   factory @{className}.fromJson(Map<dynamic, dynamic> json) {
       if (json == null) {
          return null;
       }
@@ -34,8 +34,8 @@ class @{className} implements MjolnirObject {
       );
    }
 
-   Map<String, dynamic> toJson() {
-      final output = Map<String, dynamic>();
+   Map<dynamic, dynamic> toJson() {
+      final output = Map<dynamic, dynamic>();
 
 @foreach{field : fields}        output["@{field.info.nameUnescaped}"] = @{field.resolver.dtor(field)};@end{'\n'}
 
