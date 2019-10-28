@@ -37,12 +37,30 @@ class Photo implements MjolnirObject {
     if (json == null) {
       return null;
     }
-    dynamic id = json['id']?.toString();
-    dynamic url = json['url']?.toString();
-    dynamic width = json['width'];
-    dynamic height = json['height'];
-    DateTime updated = _safeParse(json['updated']);
-    User user = User.fromJson(json['user']);
+    dynamic id;
+    dynamic url;
+    dynamic width;
+    dynamic height;
+    DateTime updated;
+    User user;
+    try {
+      id = json['id']?.toString();
+    } catch (_) {}
+    try {
+      url = json['url']?.toString();
+    } catch (_) {}
+    try {
+      width = json['width'];
+    } catch (_) {}
+    try {
+      height = json['height'];
+    } catch (_) {}
+    try {
+      updated = _safeParse(json['updated']);
+    } catch (_) {}
+    try {
+      user = User.fromJson(json['user']);
+    } catch (_) {}
 
     return Photo(
         id: id,
@@ -109,10 +127,22 @@ class User implements MjolnirObject {
     if (json == null) {
       return null;
     }
-    dynamic id = json['id']?.toString();
-    dynamic nickname = json['nickname']?.toString();
-    dynamic fullname = json['fullname']?.toString();
-    dynamic blocked = json['blocked'];
+    dynamic id;
+    dynamic nickname;
+    dynamic fullname;
+    dynamic blocked;
+    try {
+      id = json['id']?.toString();
+    } catch (_) {}
+    try {
+      nickname = json['nickname']?.toString();
+    } catch (_) {}
+    try {
+      fullname = json['fullname']?.toString();
+    } catch (_) {}
+    try {
+      blocked = json['blocked'];
+    } catch (_) {}
 
     return User(
         id: id, nickname: nickname, fullname: fullname, blocked: blocked);
