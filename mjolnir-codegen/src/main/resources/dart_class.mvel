@@ -15,7 +15,7 @@ class @{className} implements MjolnirObject {
       if (json == null) {
          return null;
       }
-@foreach{field : fields}      @{field.resolver.dynamicType(field)} @{field.info.name};@end{'\n'}
+@foreach{field : fields}      @{field.type} @{field.info.name};@end{'\n'}
 @foreach{field : fields}      try { @{field.info.name} = @{field.resolver.ctor1(field)}; } catch(_) {} @end{'\n'}
 
       @foreach{mixin : mixins("Ctor")}

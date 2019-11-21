@@ -37,10 +37,10 @@ class Photo implements MjolnirObject {
     if (json == null) {
       return null;
     }
-    dynamic id;
-    dynamic url;
-    dynamic width;
-    dynamic height;
+    String id;
+    String url;
+    int width;
+    int height;
     DateTime updated;
     User user;
     try {
@@ -127,10 +127,10 @@ class User implements MjolnirObject {
     if (json == null) {
       return null;
     }
-    dynamic id;
-    dynamic nickname;
-    dynamic fullname;
-    dynamic blocked;
+    String id;
+    String nickname;
+    String fullname;
+    bool blocked;
     try {
       id = json['id']?.toString();
     } catch (_) {}
