@@ -56,10 +56,10 @@ class DartResolver : LangResolver() {
 
     private fun arrayCtor(innerField: Field): String {
         return when (innerField) {
+            is StringField -> "it?.toString()"
             is FloatField -> "it?.toDouble()"
             is LongField,
             is BooleanField,
-            is StringField,
             is DateField,
             is IntField -> "it"
             is CustomField -> """${innerField.customType.smartCamelize()}?.fromJson(it)"""
