@@ -19,7 +19,14 @@ fun bootstrapMjolnirPatrolConfig(patrolFile: File) = if (File(pwd, "pubspec.yaml
     false
 }
 
-suspend fun generateCode(name: String, source: String, lang: String, target: String, otherModels: List<String>, dryRun: Boolean) = supervisorScope {
+suspend fun generateCode(
+    name: String,
+    source: String,
+    lang: String,
+    target: String,
+    otherModels: List<String>,
+    params: Map<String, *>,
+    dryRun: Boolean) = supervisorScope {
 
     if (source.isBlank()) {
         throw IllegalStateException("No source value provided for $name")
@@ -35,7 +42,7 @@ suspend fun generateCode(name: String, source: String, lang: String, target: Str
 
     when (lang) {
         "dart" -> {
-            domainModelsToDart(domainModels, otherModels).saveToTarget(target, dryRun)
+            domainModelsToDart(domainModels, otherModels, params).saveToTarget(target, dryRun)
         }
         else -> throw IllegalArgumentException("lang=$lang not supported by this generator")
     }

@@ -10,7 +10,8 @@ data class Model(
         val packageName: String,
         val name: String,
         private val membersMap: Map<String, *>,
-        val lang: String
+        val lang: String,
+        val params: Map<String, *>
 ) {
 
     val members: List<Member> = membersMap.asMembers(this, knownModels, otherModels, lang)
@@ -32,7 +33,7 @@ data class Model(
         get() = resolver.className(this)
 
     companion object {
-        fun fromYAML(lang: String, packageName: String, yaml: Map<String, Map<String, *>>, otherModels: List<String>): List<Model> {
+        fun fromYAML(lang: String, packageName: String, yaml: Map<String, Map<String, *>>, otherModels: List<String>, params: Map<String, *>): List<Model> {
 
             val knownModels = yaml.map { (className, _) -> className }
 
@@ -43,7 +44,8 @@ data class Model(
                         lang = lang,
                         packageName = packageName,
                         name = className,
-                        membersMap = membersMap
+                        membersMap = membersMap,
+                        params = params
                 )
             }
         }

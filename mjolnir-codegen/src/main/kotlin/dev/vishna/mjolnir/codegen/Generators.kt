@@ -5,7 +5,11 @@ import dev.vishna.mjolnir.codegen.lang.InterpolatedOutput
 import dev.vishna.mvel.interpolate
 import dev.vishna.stringcode.asResource
 
-suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) : String {
+suspend fun domainModelsToDart(
+    domainModels: String,
+    otherModels: List<String>,
+    params: Map<String, *>
+): String {
     val dartTemplate = dartTemplateFile.asResource()
 
     val models = domainModels
@@ -13,7 +17,8 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
         .asModelList(
             lang = "dart",
             packageName = "",
-            otherModels = otherModels
+            otherModels = otherModels,
+            params = params
         )
 
     val imports = models
@@ -22,7 +27,12 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
         .map { """import '$it';""" }
 
     val output = ArrayList<String>()
-    output += dartNoEditComment.asResource()
+    output += dartNoEditComment.asResource().interpolate(
+        mapOf(
+            "classes" to models.map { it.className },
+            "params" to params
+        )
+    )!!
     output += imports
     output += models.map {
         requireNotNull(dartTemplate.interpolate(it)) {
@@ -32,14 +42,17 @@ suspend fun domainModelsToDart(domainModels: String, otherModels: List<String>) 
 
     output += dartSerializerTemplateFile
         .asResource()
-        .interpolate(mapOf(
-            "classes" to models.map { it.className }
-        ))!!
+        .interpolate(
+            mapOf(
+                "classes" to models.map { it.className },
+                "params" to params
+            )
+        )!!
 
     return output.joinToString(separator = "\n").dartfmt()
 }
 
-fun domainModelsToJava(domainModels: String, otherModels: List<String>, packageName: String) : List<InterpolatedOutput> {
+fun domainModelsToJava(domainModels: String, otherModels: List<String>, packageName: String): List<InterpolatedOutput> {
     val template = javaTemplateFile.asResource()
 
     val models = domainModels
@@ -58,7 +71,11 @@ fun domainModelsToJava(domainModels: String, otherModels: List<String>, packageN
     }
 }
 
-fun domainModelsToKotlin(domainModels: String, otherModels: List<String>, packageName: String) : List<InterpolatedOutput> {
+fun domainModelsToKotlin(
+    domainModels: String,
+    otherModels: List<String>,
+    packageName: String
+): List<InterpolatedOutput> {
     val template = kotlinTemplateFile.asResource()
 
     val models = domainModels

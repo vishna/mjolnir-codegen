@@ -12,3 +12,5 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 // ignore_for_file: implicit_dynamic_parameter
 // ignore_for_file: implicit_dynamic_type
+
+@if{params.?equatable == true}import 'package:equatable/equatable.dart';@end{}

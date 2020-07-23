@@ -1,4 +1,4 @@
-class @{className} implements MjolnirObject {
+class @{className} @if{params.?equatable == true}extends Equatable@end{} implements MjolnirObject {
 
 @foreach{mixin : mixins("Body")}@{mixin.expression}@end{'\n'}
 
@@ -47,5 +47,10 @@ class @{className} implements MjolnirObject {
 
    @override
    String get objectId => @{resolver.objectId(this)}
+
+   @if{params.?equatable == true}
+   @override
+     List<Object> get props => [@foreach{field : fields}@{field.info.name}@end{','}];
+   @end{}
 
 }

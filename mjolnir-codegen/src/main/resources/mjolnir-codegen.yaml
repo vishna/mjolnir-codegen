@@ -5,3 +5,5 @@
   lang: dart
   target: lib/gen/mjolnir_sdk.dart
 # other_models: [MyCustomModel] # domain models refrenced in YAML but not defined
+# params:
+#   equatable: true # models will extend from equatable

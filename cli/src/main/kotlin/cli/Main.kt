@@ -1,4 +1,5 @@
 @file:JvmName("Main")
+
 package cli
 
 import dev.vishna.mjolnir.codegen.bootstrapMjolnirPatrolConfig
@@ -29,6 +30,7 @@ fun main(args: CommandArgs) = args.patrol {
                 target = requireNotNull(watchPoint["target"] as String?) { "target value not provided in $watchPoint" },
                 lang = requireNotNull(watchPoint["lang"] as String?) { "lang value not provided in $watchPoint" },
                 otherModels = (watchPoint["other_models"] as? List<*>)?.map { it.toString() } ?: emptyList(),
+                params = watchPoint["params"] as? Map<String, *> ?: emptyMap<String, Any>(),
                 dryRun = dryRun
             )
         }.apply {
