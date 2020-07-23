@@ -6,4 +6,7 @@
   target: lib/gen/mjolnir_sdk.dart
 # other_models: [MyCustomModel] # domain models refrenced in YAML but not defined
 # params:
-#   equatable: true # models will extend from equatable
+#  equatable: true  # (false by default) - causes generated classes to be extending from Equatable
+#  mjolnir_interface: true # (true by default) - causes generated classes to be implementing MjolnirObject
+#  lookup_table: true # (true by default) -  causes generated classes to have runtimeType to constructor lookup table
+#  paranoid: true # (false by default) -  adds extra resilence to wrong format and/or incorrect types in unparsed json

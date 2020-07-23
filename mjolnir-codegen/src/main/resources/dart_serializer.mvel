@@ -1,4 +1,5 @@
 
+@if{params.?lookup_table != false}
 dynamic Function(dynamic json) deserializerByClassName(String className) {
    switch(className) {
 @foreach{class : classes}      case "@{class}" : return @{class}.deserializer;@end{'\n'}
@@ -7,6 +8,7 @@ dynamic Function(dynamic json) deserializerByClassName(String className) {
       }
    }
 }
+@end{}
 
 DateTime _safeParse(String formattedString) {
   try {

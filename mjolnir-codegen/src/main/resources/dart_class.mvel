@@ -1,4 +1,4 @@
-class @{className} @if{params.?equatable == true}extends Equatable@end{} implements MjolnirObject {
+class @{className} @if{params.?equatable == true}extends Equatable@end{} @if{params.?mjolnir_interface != false}implements MjolnirObject@end{} {
 
 @foreach{mixin : mixins("Body")}@{mixin.expression}@end{'\n'}
 
@@ -16,7 +16,7 @@ class @{className} @if{params.?equatable == true}extends Equatable@end{} impleme
          return null;
       }
 @foreach{field : fields}      @{field.type} @{field.info.name};@end{'\n'}
-@foreach{field : fields}      try { @{field.info.name} = @{field.resolver.ctor1(field)}; } catch(_) {} @end{'\n'}
+@foreach{field : fields}      @if{params.?paranoid == true}try { @{field.info.name} = @{field.resolver.ctor1(field)}; } catch(_) {}@else{}@{field.info.name} = @{field.resolver.ctor1(field)};@end{} @end{'\n'}
 
       @foreach{mixin : mixins("Ctor")}
             // @{mixin.info.name}
@@ -45,12 +45,14 @@ class @{className} @if{params.?equatable == true}extends Equatable@end{} impleme
 
    static @{className} Function(dynamic json) deserializer = ((json) => @{className}.fromJson(json));
 
+   @if{params.?mjolnir_interface != false}
    @override
    String get objectId => @{resolver.objectId(this)}
+   @end{}
 
    @if{params.?equatable == true}
    @override
-     List<Object> get props => [@foreach{field : fields}@{field.info.name}@end{','}];
+   List<Object> get props => [@foreach{field : fields}@{field.info.name}@end{','}];
    @end{}
 
 }
