@@ -16,7 +16,9 @@ class CoreTest {
 
     @Test
     fun `domain models 1 to dart`() = runBlocking<Unit> {
-        val dartOutput = domainModelsToDart(domain_models_1.asResource(), emptyList())
+        val dartOutput = domainModelsToDart(domain_models_1.asResource(), emptyList(), mapOf<String, Any>(
+            "paranoid" to true
+        ))
         dartOutput `should be equal to` domain_models_1_dart.asResource()
     }
 
